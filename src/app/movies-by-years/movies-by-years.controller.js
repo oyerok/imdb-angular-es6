@@ -2,24 +2,25 @@ export class MoviesByYearsController {
   constructor ($log, imdb, lodash) {
     'ngInject';
     this.$log = $log;
+    this._ = lodash;
     this.activate(imdb, lodash);
     this.chart = {
       type: "PieChart",
       data: {
         "cols": [
           {id: "s", label: "Movies", type: "string"},
-          {id: "n", label: "Years", type: "number"}
+          {id: "n", label: "Decade", type: "number"}
         ],
         "rows": []},
       options: {
-        title: 'Movies By Years'
+        title: 'Movies By Decade'
       }
     };
   }
 
-  activate(imdb, lodash) {
+  activate(imdb) {
     this.getMovies(imdb).then((data) => {
-      this.setDataForChart(this.chart, data, lodash)
+      this.setDataForChart(this.chart, data)
     })
   }
 
@@ -29,10 +30,13 @@ export class MoviesByYearsController {
     });
   }
 
-  setDataForChart(chart, data, _) {
-    _.forOwn(_.groupBy(data, 'year'), (item, key) => {
+  setDataForChart(chart, data) {
+    this._.forOwn(data, (item, key) => {
+      item['decade'] = Math.floor((item.year)/10)*10;
+    });
+    this._.forOwn(_.groupBy(data, 'decade'), (item, key) => {
       let title = '';
-      _.forOwn(item, (movie, k) => {
+      this._.forOwn(item, (movie, k) => {
         if (k > 0) {
           title += ', ' + movie.title;
         } else {

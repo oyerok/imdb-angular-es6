@@ -5,9 +5,9 @@ export function runBlock ($log, $rootScope) {
   /**
    * Set title for each page
    */
-  $rootScope.$on('$routeChangeStart', function (event, current) {
-    if (current.hasOwnProperty('$route')) {
-      $rootScope.title = current.$route.title;
+  $rootScope.$on('$stateChangeStart', function (event, current) {
+    if (current.hasOwnProperty('title')) {
+      $rootScope.title = current.title;
     }
   });
 }
