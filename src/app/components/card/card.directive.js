@@ -5,12 +5,13 @@ export function CardDirective() {
     restrict: 'EA',
     templateUrl: 'app/components/card/card.html',
     scope: {
-      movie: '='
+      movie: '=',
+      favorites: '=movies'
     },
     controller: CardController,
     link: linkFunction,
-    controllerAs: 'vm'
-    //bindToController: true
+    controllerAs: 'vm',
+    bindToController: true
   };
   return directive;
 }
@@ -26,17 +27,11 @@ class CardController {
     this.localStorageService = localStorageService;
     this._ = lodash;
     this.$state = $state;
-    this.activate(this.$state);
-    this.visible = null;
-    this.isFavorite = null;
-
 
     // "this.creationDate" is available by directive option "bindToController: true"
   }
-  activate(state) {
-    if (state.current.name == 'home') {
-     this.visible = true;
-    }
+  activate() {
+
   }
 
   getFavorites() {
@@ -52,31 +47,14 @@ class CardController {
   }
 
   removeFromFavorites(item) {
-    let favorites = angular.fromJson(this.getFavorites()) || [];
-    for (var i = favorites.length - 1; i > -1; i--) {
-      if (favorites[i].idIMDB == item.idIMDB) {
-        favorites.splice(i, 1);
+    if (this.favorites) {
+      for (var i = this.favorites.length - 1; i > -1; i--) {
+        if (this.favorites[i]['idIMDB'] == item.idIMDB) {
+          this.favorites.splice(i, 1);
+        }
       }
+      alert(item.title + ' has been removed from your favorites');
+      this.localStorageService.set('favorites', angular.toJson(this.favorites));
     }
-    this.$log.debug(favorites, 'Fav');
-    alert(item.title + ' has been removed from your favorites');
-    this.localStorageService.set('favorites', angular.toJson(favorites));
-
   }
-
-  //isFavorite() {
-  //  //this.$log.debug(this.movie.idIMDB);
-  //  let favorites = angular.fromJson(this.getFavorites()) || [];
-  //  this.$log.debug(favorites);
-  //  favorites.forEach((item, i) => {
-  //    this.$log.debug(favorites[i].idIMDB == this.movie.idIMDB);
-  //    if (item.idIMDB == this.movie.idIMDB) {
-  //      return true;
-  //    }
-  //  })
-  //    //favorites.some((current) => {
-  //    //  //this.$log.debug(this.movie.idIMDB == current.idIMDB, 'movie.idIMDB == current.idIMDB');
-  //    //  return this.movie.idIMDB == current.idIMDB;
-  //    //})
-  //}
 }
