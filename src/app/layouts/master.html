@@ -1,0 +1,16 @@
+<div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <imdb-navbar></imdb-navbar>
+  </header>
+  <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+    <span class="mdl-layout-title">Menu</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" ui-sref="home">Home</a>
+      <a class="mdl-navigation__link" ui-sref="movies-by-years">By years</a>
+      <a class="mdl-navigation__link" ui-sref="favorites">Favorites</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content anim-in-out anim-fade" data-anim-speed="300" ui-view></div>
+  </main>
+</div>

@@ -1,0 +1,36 @@
+imdb-card {
+  &.mdl-card {
+    >.mdl-card__title {
+      height: 250px;
+      &:after {
+        width: 100%;
+        background: #000000;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    >.mdl-card__title-text {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    >.mdl-card_actions {
+      height: 52px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    >.mdl-card__menu {
+      .favorites {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        .material-icons {
+          font-size: 18px;
+        }
+      }
+      .active {
+        background: #3f51b5;;
+      }
+    }
+  }
+}

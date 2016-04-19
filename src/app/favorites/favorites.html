@@ -1,0 +1,9 @@
+<div class="mdl-grid">
+  <div ng-if="!favorites.movies.length">You haven't had any favorites movies yet</div>
+  <imdb-card ng-repeat="movie in favorites.movies" movie="movie"
+             class="mdl-card mdl-shadow--2dp mdl-cell
+           mdl-cell--12-col-phone
+           mdl-cell--2-col-tablet
+           mdl-cell--2-col-desktop">
+  </imdb-card>
+</div>

@@ -1,0 +1,31 @@
+{
+  "name": "imdb",
+  "description": "Simple web application that provides IMDB top-20 movies",
+  "version": "0.0.1",
+  "authors": [
+    "Alexey Yerokhin <alexey.yerokhin@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "angular-animate": "~1.5.3",
+    "angular-touch": "~1.5.3",
+    "angular-sanitize": "~1.5.3",
+    "angular-messages": "~1.5.3",
+    "angular-aria": "~1.5.3",
+    "angular-ui-router": "~0.2.15",
+    "material-design-lite": "~1.0.4",
+    "material-design-iconfont": "~0.0.2",
+    "animate.css": "~3.4.0",
+    "angular": "~1.5.3",
+    "angular-ui-router-anim-in-out": "^1.0.2",
+    "angular-google-chart": "0.1.0",
+    "ng-lodash": "^0.4.0",
+    "angular-local-storage": "^0.2.7"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5.3"
+  },
+  "resolutions": {
+    "angular": "~1.5.3"
+  }
+}
