@@ -14,11 +14,6 @@ export class FavoritesController {
 
   getMovies() {
     this.movies = angular.fromJson(this.localStorageService.get('favorites'));
-    //this.$log.debug(this.movies, 'Movies');
-  }
-
-  removeFromFavorites() {
-    this.$log.debug(this.movies);
   }
 
 

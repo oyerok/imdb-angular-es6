@@ -6,7 +6,7 @@ export function CardDirective() {
     templateUrl: 'app/components/card/card.html',
     scope: {
       movie: '=',
-      favorites: '=movies'
+      favorites: '=favorites'
     },
     controller: CardController,
     link: linkFunction,
@@ -30,20 +30,15 @@ class CardController {
 
     // "this.creationDate" is available by directive option "bindToController: true"
   }
-  activate() {
-
-  }
-
-  getFavorites() {
-    return this.localStorageService.get('favorites');
-  }
 
   addToFavorites(item) {
-    this.$log.debug(item, 'Add to Favorites');
-    let favorites = angular.fromJson(this.getFavorites()) || [];
-    favorites.push(item);
-    alert(item.title + ' has been added to your favorites');
-    this.localStorageService.set('favorites', angular.toJson(favorites));
+    if (!this.isFavorites(item)) {
+      this.favorites.push(item);
+      alert(item.title + ' has been added to your favorites');
+      this.localStorageService.set('favorites', angular.toJson(this.favorites));
+    } else {
+      alert(item.title + ' already in your favorites');
+    }
   }
 
   removeFromFavorites(item) {
@@ -55,6 +50,12 @@ class CardController {
       }
       alert(item.title + ' has been removed from your favorites');
       this.localStorageService.set('favorites', angular.toJson(this.favorites));
+    }
+  }
+
+  isFavorites(movie) {
+    for (var i = 0; i < this.favorites.length; i++) {
+      return this.favorites[i].idIMDB == movie.idIMDB;
     }
   }
 }
